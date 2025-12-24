@@ -1,6 +1,7 @@
 ## 📁 Project Structure
 
 ```text
+
 Smart-Traffic-Violation-Detection-System/
 ├── src/
 │   ├── train.py          # Trains YOLOv8 model on traffic dataset
@@ -12,6 +13,7 @@ Smart-Traffic-Violation-Detection-System/
 ├── README.md
 └── .gitignore
 
+Summary: A real-time red-light violation detection pipeline using YOLOv8 and OpenCV. Combines deep learning with rule-based logic for robust violation analysis with low false positives.
 
 ## ⚙️ Environment & Requirements
 
