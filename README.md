@@ -60,3 +60,62 @@ Violations are sparse events in real traffic scenarios. The system prioritizes c
 
 - Average inference time: ~37 ms per frame (RTX 3050 Laptop GPU)
 - Real-time capable for traffic surveillance applications
+
+
+## 🧠 Methodology
+
+The system follows a modular, end-to-end pipeline for detecting traffic violations from video streams. The methodology is designed to be interpretable, robust, and close to real-world deployment scenarios.
+
+### 1. Object Detection
+- A YOLOv8 object detection model is trained to detect:
+  - Vehicles: `car`, `bus`, `truck`, `motorcycle`, `ambulance`
+  - Traffic signals: `red_light`, `green_light`, `yellow_light`
+- The model processes each video frame independently and outputs bounding boxes with class labels and confidence scores.
+
+### 2. Traffic Signal State Identification
+- Traffic light detections are analyzed per frame.
+- The dominant signal state (Red / Yellow / Green) is determined based on:
+  - Detection confidence
+  - Spatial consistency of signal bounding boxes
+- Only **red signal states** are considered for violation analysis.
+
+### 3. Virtual Stop Line Definition
+- A virtual stop line is manually defined in the scene using fixed pixel coordinates.
+- This line represents the legal stopping boundary at an intersection.
+- The stop line remains constant throughout the video.
+
+### 4. Vehicle–Stop Line Interaction Analysis
+- For each detected vehicle:
+  - The bottom-center point of the bounding box is tracked per frame.
+  - The system checks whether this point crosses the stop line.
+- Crossing events are evaluated **only when the traffic signal is red**.
+
+### 5. Violation Logic
+A traffic violation is registered if and only if:
+- The traffic signal is **red**, and
+- A vehicle crosses the predefined stop line.
+
+This rule-based logic significantly reduces false positives and ensures that only genuine violations are counted.
+
+### 6. Violation Counting and Logging
+- Each confirmed violation increments a counter.
+- Violations can optionally be:
+  - Logged with frame numbers or timestamps
+  - Saved as annotated frames or output videos
+
+---
+
+### 🔁 Pipeline Summary
+
+```text
+Input Video
+   ↓
+YOLOv8 Object Detection
+   ↓
+Traffic Signal State Identification
+   ↓
+Stop Line Crossing Check
+   ↓
+Rule-Based Violation Logic
+   ↓
+Violation Count & Visual Output
