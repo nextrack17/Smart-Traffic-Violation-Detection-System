@@ -13,6 +13,19 @@ Smart-Traffic-Violation-Detection-System/
 └── .gitignore
 
 
+## ⚙️ Environment & Requirements
+
+- Python 3.10
+- PyTorch 2.x
+- Ultralytics YOLOv8
+- OpenCV
+- NumPy
+- NVIDIA GPU RTX3050 with CUDA support
+
+All dependencies are listed in `requirements.txt`.
+
+
+
 ## 📊 Results & Metrics
 
 The model was trained using YOLOv8 on a merged traffic surveillance dataset containing vehicles and traffic signal classes. Performance was evaluated on a held-out validation set.
