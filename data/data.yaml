@@ -1,0 +1,13 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 8
+names: ['ambulance', 'bus', 'car', 'green_light', 'motorcycle', 'red_light', 'truck', 'yellow_light']
+
+roboflow:
+  workspace: traffic-safety-detection
+  project: traffic-violation-alert-system
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/traffic-safety-detection/traffic-violation-alert-system/dataset/2

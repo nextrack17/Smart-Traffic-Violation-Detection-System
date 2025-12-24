@@ -1,0 +1,18 @@
+# environments
+cv_env/
+venv/
+
+# model weights
+*.pt
+
+# datasets
+data/train/
+data/valid/
+data/test/
+
+# videos
+*.mp4
+
+# cache
+__pycache__/
+*.pyc
